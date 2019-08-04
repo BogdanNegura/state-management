@@ -1,23 +1,26 @@
-import React, {useState} from 'react'
+import React, { useState, useContext } from 'react'
+import { MovieContext } from './MovieContext'
 
 const AddMovie = () => {
     const [name, setName] = useState('')
     const [price, setPrice] = useState('')
+    const [movies, setMovies] = useContext(MovieContext)
 
     const updateName = (e) => {
         setName(e.target.value)
     }
     const updatePrice = (e) => {
-        setName(e.target.value)
+        setPrice(e.target.value)
     }
 
     const addMovie = e => {
         e.preventDefault()
+        setMovies(prevMovies => [...prevMovies, {name: name, price: price}])
         
     }
 
     return (
-        <form>
+        <form onSubmit={addMovie}>
             <input 
                 type="text" 
                 name="name" 
